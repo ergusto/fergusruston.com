@@ -41,7 +41,7 @@ function SectionLink({
   return (
     <Link to={to} className="group block">
       <div className="rule" />
-      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-4 transition-[padding,background-color,color] duration-200 group-hover:bg-fg group-hover:px-4 group-hover:text-bg group-focus-visible:bg-fg group-focus-visible:px-4 group-focus-visible:text-bg md:py-6">
+      <div className="flex flex-col gap-x-6 gap-y-1 py-4 md:flex-row md:items-baseline md:justify-between transition-[padding,background-color,color] duration-200 group-hover:bg-fg group-hover:px-4 group-hover:text-bg group-focus-visible:bg-fg group-focus-visible:px-4 group-focus-visible:text-bg md:py-6">
         <span className="display text-3xl md:text-6xl">{label}</span>
         <span className="text-lg font-semibold md:text-xl">{detail}</span>
       </div>

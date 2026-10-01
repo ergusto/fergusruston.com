@@ -4,10 +4,17 @@ export type Role = {
   company: string;
   title: string;
   location?: string;
+  employment?: "Contract";
   startYear: string;
   endYear: string;
   dates: string;
   highlights: string[];
+  links?: RoleLink[];
+};
+
+export type RoleLink = {
+  label: string;
+  href: string;
 };
 
 export type SkillGroup = {
@@ -48,14 +55,22 @@ export const roles: Role[] = [
     dates: "May 2023 – Present",
     highlights: [
       "Develop and ship production features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
-      "Designed and delivered features across two large-scale React Native applications, O2 Priority and Travelex Money App.",
+      "Part of the team that built Travelex Money App, a new greenfield React Native app delivered in under six months. Led to a double-digit increase in sales conversion and a 99.8% crash-free rate.",
+      "Designed and delivered features for O2 Priority, a large-scale React Native application.",
       "Work across the full TypeScript stack, from React and React Native front ends through to Node.js/Fastify backend services.",
       "Collaborate closely with product, design and engineering teams to deliver features from technical implementation through to production.",
+    ],
+    links: [
+      {
+        label: "Read the Travelex Money App case study",
+        href: "https://nearform.com/work/travelex/",
+      },
     ],
   },
   {
     company: "Federatial",
-    title: "Full Stack Contractor",
+    title: "Full Stack Engineer",
+    employment: "Contract",
     location: "Remote",
     startYear: "2022",
     endYear: "2023",
@@ -68,21 +83,29 @@ export const roles: Role[] = [
   },
   {
     company: "Pugpig",
-    title: "Frontend Contractor",
+    title: "Frontend Engineer",
+    employment: "Contract",
     location: "London / Remote",
     startYear: "2020",
     endYear: "2022",
     dates: "September 2020 – August 2022",
     highlights: [
       "Developed websites and mobile applications for major publishers including New Scientist, The Independent and Tortoise Media.",
-      "Led much of the Vue.js rewrite of the New Scientist mobile application, which is still in use today and has achieved a consistent 4.7 App Store rating.",
+      "Led much of the Vue.js rewrite of the New Scientist mobile application, which is still in use today and has achieved a consistent 4.7 App Store rating. Post relaunch, paid subscribers rose 10–15%, and 85% of subscribers surveyed said the app played a part in their renewal.",
       "Developed bespoke publisher experiences on top of Pugpig’s underlying publishing platforms, adapting shared technology to the requirements of individual products.",
       "Worked across web and mobile codebases within a product-focused engineering environment.",
+    ],
+    links: [
+      {
+        label: "Read the New Scientist case study",
+        href: "https://www.pugpig.com/case-study/new-scientist/",
+      },
     ],
   },
   {
     company: "Federatial",
-    title: "Full Stack Contractor",
+    title: "Full Stack Engineer",
+    employment: "Contract",
     location: "Remote",
     startYear: "2017",
     endYear: "2020",

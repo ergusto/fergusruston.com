@@ -16,6 +16,7 @@ export function RoleCard({ role }: { role: Role }) {
           <p className="mt-1 text-lg font-semibold">
             {role.company}
             {role.location && <span className="text-muted">, {role.location}</span>}
+            {role.employment && <span className="text-muted">, {role.employment}</span>}
           </p>
           <p className="text-muted">{role.dates}</p>
           <ul className="mt-4 max-w-[60ch] list-[square] space-y-1 pl-5">
@@ -23,6 +24,20 @@ export function RoleCard({ role }: { role: Role }) {
               <li key={highlight}>{highlight}</li>
             ))}
           </ul>
+          {role.links && (
+            <ul className="mt-4 space-y-1">
+              {role.links.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="font-semibold underline decoration-2 underline-offset-4 transition-colors hover:bg-fg hover:text-bg"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </article>
     </Reveal>
