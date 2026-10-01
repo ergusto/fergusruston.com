@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+@theme {
+  --color-ink: #000;
+  --color-paper: #fff;
+  --color-signal: #ffd600;
+  --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-mark: var(--mark);
+  --color-muted: var(--muted);
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --rule: clamp(3px, 0.45vw, 6px);
+}
+
+[data-theme] {
+  --muted: color-mix(in srgb, var(--fg) 65%, var(--bg));
+  background: var(--bg);
+  color: var(--fg);
+}
+
+[data-theme="paper"] {
+  --bg: var(--color-paper);
+  --fg: var(--color-ink);
+  --mark: var(--color-signal);
+  --wipe: var(--color-signal);
+}
+
+[data-theme="signal"] {
+  --bg: var(--color-signal);
+  --fg: var(--color-ink);
+  --mark: var(--color-paper);
+  --wipe: var(--color-ink);
+}
+
+[data-theme="ink"] {
+  --bg: var(--color-ink);
+  --fg: var(--color-paper);
+  --mark: var(--color-signal);
+  --wipe: var(--color-signal);
+}
+
+html {
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.1875rem);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+.display {
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.fit {
+  container-type: inline-size;
+}
+
+.name {
+  font-size: 17.9cqw;
+  line-height: 0.8;
+  margin-left: -0.06em;
+  animation: stretch-out 900ms cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}
+
+.email {
+  font-size: 11.6cqw;
+  font-weight: 900;
+  font-stretch: 62%;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+@keyframes stretch-out {
+  from {
+    font-stretch: 62%;
+  }
+}
+
+.rule {
+  height: var(--rule);
+  background: currentColor;
+}
+
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--wipe);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name {
+    animation: none;
+  }
+}
+
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  html {
+    font-size: 10pt;
+  }
+
+  :root {
+    --rule: 1.5pt;
+  }
+
+  [data-theme] {
+    --bg: #fff;
+    --fg: #000;
+  }
+
+  [data-reveal],
+  [data-reveal] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-wipe {
+    display: none;
+  }
+}
