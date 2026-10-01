@@ -1,4 +1,4 @@
-export const siteUrl = "https://fergusruston.com";
+export const siteUrl = "https://www.fergusruston.com";
 
 export type Role = {
   company: string;

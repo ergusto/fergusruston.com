@@ -49,6 +49,8 @@ All copy lives in `src/content/cv.ts` as typed data, taken from Fergus's CV plus
 
 - `pnpm build` writes static files to `dist/client`: `index.html`, `experience.html`, `contact.html`, `404.html`.
 - `wrangler.jsonc` points `assets.directory` at `dist/client` with `not_found_handling: "404-page"`.
+- The site is served at `https://www.fergusruston.com`. `worker.js` redirects the bare domain to `www` with a 301 and passes every other request to the static files. Both hostnames are attached as custom domains in `wrangler.jsonc`.
+- When adding a hostname, attach it and confirm it serves before redirecting anything to it.
 - `pnpm preview` serves the built output locally through Wrangler. `pnpm run deploy` builds and publishes (`pnpm deploy` without `run` is a different, built-in pnpm command).
 
 ## Known issue
