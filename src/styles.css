@@ -2,49 +2,24 @@
 @import "@fontsource-variable/archivo/wdth.css";
 
 @theme {
-  --color-ink: #000;
+  --color-cobalt: #1e3a9e;
   --color-paper: #fff;
-  --color-signal: #ffd600;
   --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
-  --color-mark: var(--mark);
   --color-muted: var(--muted);
 }
 
 :root {
+  --bg: var(--color-cobalt);
+  --fg: var(--color-paper);
+  --muted: color-mix(in srgb, var(--fg) 72%, var(--bg));
   --gutter: clamp(1rem, 4vw, 3rem);
   --rule: clamp(3px, 0.45vw, 6px);
-}
-
-[data-theme] {
-  --muted: color-mix(in srgb, var(--fg) 65%, var(--bg));
-  background: var(--bg);
-  color: var(--fg);
-}
-
-[data-theme="paper"] {
-  --bg: var(--color-paper);
-  --fg: var(--color-ink);
-  --mark: var(--color-signal);
-  --wipe: var(--color-signal);
-}
-
-[data-theme="signal"] {
-  --bg: var(--color-signal);
-  --fg: var(--color-ink);
-  --mark: var(--color-paper);
-  --wipe: var(--color-ink);
-}
-
-[data-theme="ink"] {
-  --bg: var(--color-ink);
-  --fg: var(--color-paper);
-  --mark: var(--color-signal);
-  --wipe: var(--color-signal);
+  --heading-max: 128px;
 }
 
 html {
@@ -53,6 +28,8 @@ html {
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -64,8 +41,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-signal);
-  color: var(--color-ink);
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .display {
@@ -81,24 +58,22 @@ body {
 }
 
 .name {
-  font-size: 17.9cqw;
+  font-size: min(17.9cqw, var(--heading-max));
   line-height: 0.8;
   margin-left: -0.06em;
-  animation: stretch-out 900ms cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+}
+
+.page-title {
+  font-size: min(11.9cqw, var(--heading-max));
+  margin-left: -0.05em;
 }
 
 .email {
-  font-size: 11.6cqw;
+  font-size: clamp(1.5rem, 6cqw, 3rem);
   font-weight: 900;
   font-stretch: 62%;
   line-height: 1;
   letter-spacing: -0.01em;
-}
-
-@keyframes stretch-out {
-  from {
-    font-stretch: 62%;
-  }
 }
 
 .rule {
@@ -106,16 +81,41 @@ body {
   background: currentColor;
 }
 
-.page-wipe {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: var(--wipe);
-  pointer-events: none;
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: cover-up 320ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+::view-transition-new(root) {
+  animation: uncover-down 320ms cubic-bezier(0.76, 0, 0.24, 1) 320ms both;
+}
+
+/* Both ends are explicit because clip-path cannot interpolate from its default of none */
+@keyframes cover-up {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes uncover-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .name {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none;
   }
 }
@@ -130,21 +130,14 @@ body {
   }
 
   :root {
-    --rule: 1.5pt;
-  }
-
-  [data-theme] {
     --bg: #fff;
     --fg: #000;
+    --rule: 1.5pt;
   }
 
   [data-reveal],
   [data-reveal] > * {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .page-wipe {
-    display: none;
   }
 }

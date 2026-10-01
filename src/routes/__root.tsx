@@ -3,23 +3,15 @@ import {
   Outlet,
   Scripts,
   createRootRoute,
-  useLocation,
 } from '@tanstack/react-router'
 import { MotionConfig } from 'motion/react'
 import type { ReactNode } from 'react'
 
 import { NotFound } from '#/components/NotFound'
-import { PageTransition } from '#/components/PageTransition'
 import { SiteNav } from '#/components/SiteNav'
 import { fullName, profile, siteUrl } from '#/content/cv'
+import archivoFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url'
 import appCss from '../styles.css?url'
-
-type Theme = 'paper' | 'signal' | 'ink'
-
-const pageThemes: Record<string, Theme> = {
-  '/': 'signal',
-  '/contact': 'ink',
-}
 
 const revealFallback =
   '[data-reveal],[data-reveal]>*{opacity:1!important;transform:none!important}'
@@ -35,8 +27,11 @@ export const Route = createRootRoute({
       { property: 'og:site_name', content: fullName },
       { property: 'og:image', content: `${siteUrl}/og.png` },
       { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'theme-color', content: '#1e3a9e' },
     ],
     links: [
+      // Without the preload, headings first paint in the fallback font and jump when Archivo arrives
+      { rel: 'preload', as: 'font', type: 'font/woff2', href: archivoFont, crossOrigin: 'anonymous' },
       { rel: 'stylesheet', href: appCss },
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
     ],
@@ -47,8 +42,6 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: ReactNode }) {
-  const pathname = useLocation({ select: (location) => location.pathname })
-
   return (
     <html lang="en">
       <head>
@@ -57,7 +50,7 @@ function RootDocument({ children }: { children: ReactNode }) {
           <style>{revealFallback}</style>
         </noscript>
       </head>
-      <body data-theme={pageThemes[pathname] ?? 'paper'} className="min-h-dvh">
+      <body className="min-h-dvh">
         {children}
         <Scripts />
       </body>
@@ -70,7 +63,6 @@ function RootLayout() {
     <MotionConfig reducedMotion="user">
       <SiteNav />
       <Outlet />
-      <PageTransition />
     </MotionConfig>
   )
 }

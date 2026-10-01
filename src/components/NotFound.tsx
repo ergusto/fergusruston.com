@@ -9,7 +9,7 @@ export function NotFound() {
       </p>
       <Link
         to="/"
-        className="mt-8 inline-block bg-fg px-5 py-3 font-bold text-bg transition-colors hover:bg-mark hover:text-ink"
+        className="mt-8 inline-block border-4 border-fg bg-fg px-5 py-3 font-bold text-bg transition-colors hover:bg-bg hover:text-fg"
       >
         Go to the home page
       </Link>

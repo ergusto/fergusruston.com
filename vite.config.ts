@@ -1,9 +1,14 @@
+import net from 'node:net'
 import { defineConfig } from 'vite'
 
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+
+// The prerender server listens on IPv6 only. Node gives up on an IPv6 connection after 250ms
+// and falls back to IPv4, which is refused, so a busy machine fails the build at random.
+net.setDefaultAutoSelectFamilyAttemptTimeout(2000)
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },

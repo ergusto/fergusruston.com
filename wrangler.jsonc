@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "fergusruston-com",
   "compatibility_date": "2026-10-01",
+  "routes": [{ "pattern": "fergusruston.com", "custom_domain": true }],
   "assets": {
     "directory": "./dist/client",
     "not_found_handling": "404-page"
