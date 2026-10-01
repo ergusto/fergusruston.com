@@ -1,7 +1,9 @@
 import { Link, useMatches } from '@tanstack/react-router'
 import { fullName } from '#/content/cv'
 
-const navLink = 'px-3 py-1.5 font-bold transition-colors hover:bg-fg hover:text-bg'
+// On phones the ::after extends the tap area above and below to about 48px without enlarging the visible button
+const navLink =
+  "relative px-2 py-1 text-sm font-bold transition-colors after:absolute after:inset-x-0 after:-inset-y-2.5 after:content-[''] hover:bg-fg hover:text-bg md:px-3 md:py-1.5 md:text-base md:after:hidden"
 const currentPage = 'bg-fg text-bg'
 
 export function SiteNav() {
@@ -17,7 +19,7 @@ export function SiteNav() {
       >
         {fullName}
       </Link>
-      <nav aria-label="Main" className="-mr-3 flex gap-1">
+      <nav aria-label="Main" className="-mr-2 flex gap-2 md:-mr-3 md:gap-1">
         <NavLink to="/experience" isCurrent={currentRoute === '/experience'}>
           Experience
         </NavLink>

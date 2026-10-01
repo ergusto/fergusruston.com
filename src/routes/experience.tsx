@@ -1,4 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useInView } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import type { RefObject } from 'react'
 import { Reveal } from '#/components/Reveal'
 import { RoleCard } from '#/components/RoleCard'
 import { fullName, profile, roles, siteUrl, skills } from '#/content/cv'
@@ -20,7 +23,42 @@ const sectionHeading = 'display text-3xl md:text-5xl print:text-xl'
 const sectionGrid =
   'grid gap-x-10 gap-y-6 py-6 md:grid-cols-[15rem_minmax(0,1fr)] md:py-10 print:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] print:py-4'
 
+function useIsBelow(
+  target: RefObject<Element | null>,
+  obstacle: RefObject<Element | null>,
+) {
+  const [isBelow, setIsBelow] = useState(false)
+
+  useEffect(() => {
+    const update = () => {
+      if (!target.current || !obstacle.current) return
+      setIsBelow(
+        obstacle.current.getBoundingClientRect().bottom <=
+          target.current.getBoundingClientRect().top,
+      )
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [target, obstacle])
+
+  return isBelow
+}
+
 function Experience() {
+  const introRef = useRef<HTMLDivElement>(null)
+  const scrollCueRef = useRef<SVGSVGElement>(null)
+  const rolesRef = useRef<HTMLElement>(null)
+  // Same viewport margin as Reveal, so the cue goes as the first role starts to animate in
+  const rolesInView = useInView(rolesRef, { once: true, margin: '0px 0px -12% 0px' })
+  const scrollCueIsClear = useIsBelow(scrollCueRef, introRef)
+  const showScrollCue = scrollCueIsClear && !rolesInView
+
   return (
     <main className="px-(--gutter) pb-24 print:p-0">
       <h1 className="fit pt-6 md:pt-12 print:hidden">
@@ -34,7 +72,10 @@ function Experience() {
         </p>
       </header>
 
-      <div className="mt-8 flex flex-wrap items-start justify-between gap-6 md:mt-12 print:mt-4">
+      <div
+        ref={introRef}
+        className="mt-8 flex flex-wrap items-start justify-between gap-6 md:mt-12 print:mt-4"
+      >
         <div className="max-w-[60ch] space-y-4 text-lg/relaxed md:text-xl/relaxed print:space-y-2 print:text-base">
           {profile.summary.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
@@ -49,7 +90,19 @@ function Experience() {
         </button>
       </div>
 
-      <section className="mt-12 md:mt-20 print:mt-6">
+      <svg
+        ref={scrollCueRef}
+        aria-hidden
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        className={`scroll-cue pointer-events-none fixed bottom-6 left-(--gutter) hidden size-10 transition-opacity duration-300 md:block print:hidden ${showScrollCue ? '' : 'opacity-0'}`}
+      >
+        <path d="M4 8l8 8 8-8" />
+      </svg>
+
+      <section ref={rolesRef} className="mt-12 md:mt-20 print:mt-6">
         <h2 className="sr-only">Work history</h2>
         {roles.map((role) => (
           <RoleCard key={`${role.company}-${role.startYear}`} role={role} />

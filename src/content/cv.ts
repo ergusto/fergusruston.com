@@ -54,11 +54,11 @@ export const roles: Role[] = [
     endYear: "Now",
     dates: "May 2023 – Present",
     highlights: [
-      "Develop and ship production features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
-      "Part of the team that built Travelex Money App, a new greenfield React Native app delivered in under six months. Led to a double-digit increase in sales conversion and a 99.8% crash-free rate.",
-      "Designed and delivered features for O2 Priority, a large-scale React Native application.",
-      "Work across the full TypeScript stack, from React and React Native front ends through to Node.js/Fastify backend services.",
-      "Collaborate closely with product, design and engineering teams to deliver features from technical implementation through to production.",
+      "Developed and shipped production features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
+      "Built Travelex Money App, a greenfield React Native app, as part of the team that delivered it in under six months, leading to a double-digit increase in sales conversion and a 99.8% crash-free rate.",
+      "Designed and delivered features for O2 Priority, a large-scale React Native application with 3.6 million active users.",
+      "Worked across the full TypeScript stack, from React and React Native front ends through to Node.js/Fastify backend services.",
+      "Collaborated closely with product, design and engineering teams to deliver features from technical implementation through to production.",
     ],
     links: [
       {

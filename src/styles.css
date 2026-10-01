@@ -113,9 +113,32 @@ body {
   }
 }
 
+.scroll-cue {
+  animation: scroll-cue-nudge 3s ease-in-out infinite;
+}
+
+/* Still for the first 70% of each cycle, then one small dip that settles */
+@keyframes scroll-cue-nudge {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  79% {
+    transform: translateY(6px);
+  }
+  88% {
+    transform: translateY(-2px);
+  }
+  95% {
+    transform: translateY(1px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-new(root),
+  .scroll-cue {
     animation: none;
   }
 }

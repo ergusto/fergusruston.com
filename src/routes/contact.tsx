@@ -23,7 +23,7 @@ function Contact() {
       <div className="fit mt-10 md:mt-16">
         <a
           href={`mailto:${profile.email}`}
-          className="email block transition-colors hover:bg-fg hover:text-bg"
+          className="email inline-block transition-colors hover:bg-fg hover:text-bg"
         >
           {profile.email}
         </a>
