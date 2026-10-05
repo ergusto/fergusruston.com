@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as ExperienceChar123ViewChar125RouteImport } from './routes/experience.{-$view}'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,44 +29,45 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExperienceRoute = ExperienceRouteImport.update({
-  id: '/experience',
-  path: '/experience',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const ExperienceChar123ViewChar125Route =
+  ExperienceChar123ViewChar125RouteImport.update({
+    id: '/experience/{-$view}',
+    path: '/experience/{-$view}',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
-  '/experience': typeof ExperienceRoute
+  '/experience/{-$view}': typeof ExperienceChar123ViewChar125Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
-  '/experience': typeof ExperienceRoute
+  '/experience/{-$view}': typeof ExperienceChar123ViewChar125Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
-  '/experience': typeof ExperienceRoute
+  '/experience/{-$view}': typeof ExperienceChar123ViewChar125Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/contact' | '/experience'
+  fullPaths: '/' | '/$' | '/contact' | '/experience/{-$view}'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/contact' | '/experience'
-  id: '__root__' | '/' | '/$' | '/contact' | '/experience'
+  to: '/' | '/$' | '/contact' | '/experience/{-$view}'
+  id: '__root__' | '/' | '/$' | '/contact' | '/experience/{-$view}'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   ContactRoute: typeof ContactRoute
-  ExperienceRoute: typeof ExperienceRoute
+  ExperienceChar123ViewChar125Route: typeof ExperienceChar123ViewChar125Route
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +93,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/experience': {
-      id: '/experience'
-      path: '/experience'
-      fullPath: '/experience'
-      preLoaderRoute: typeof ExperienceRouteImport
+    '/experience/{-$view}': {
+      id: '/experience/{-$view}'
+      path: '/experience/{-$view}'
+      fullPath: '/experience/{-$view}'
+      preLoaderRoute: typeof ExperienceChar123ViewChar125RouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,17 +107,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   ContactRoute: ContactRoute,
-  ExperienceRoute: ExperienceRoute,
+  ExperienceChar123ViewChar125Route: ExperienceChar123ViewChar125Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

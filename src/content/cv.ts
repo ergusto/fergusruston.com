@@ -8,12 +8,15 @@ export type Role = {
   startYear: string;
   endYear: string;
   dates: string;
+  technologies?: string[];
   highlights: string[];
   links?: RoleLink[];
 };
 
 export type RoleLink = {
   label: string;
+  // Shorter name used where a heading already says what the link is
+  subject: string;
   href: string;
 };
 
@@ -53,6 +56,7 @@ export const roles: Role[] = [
     startYear: "2023",
     endYear: "Now",
     dates: "May 2023 – Present",
+    technologies: ["Next.js", "React", "React Native", "TypeScript", "Node.js", "Fastify"],
     highlights: [
       "Developed and shipped production features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
       "Built Travelex Money App, a greenfield React Native app, as part of the team that delivered it in under six months, leading to a double-digit increase in sales conversion and a 99.8% crash-free rate.",
@@ -63,6 +67,7 @@ export const roles: Role[] = [
     links: [
       {
         label: "Read the Travelex Money App case study",
+        subject: "Travelex Money App",
         href: "https://nearform.com/work/travelex/",
       },
     ],
@@ -75,6 +80,7 @@ export const roles: Role[] = [
     startYear: "2022",
     endYear: "2023",
     dates: "August 2022 – May 2023",
+    technologies: ["React", "Tailwind CSS", "Express.js"],
     highlights: [
       "Modernised the administration interface of a legacy platform using React and Tailwind CSS, substantially improving its user experience and maintainability.",
       "Extended and maintained an Express.js REST API, implementing improved permissions and user-management capabilities.",
@@ -89,6 +95,7 @@ export const roles: Role[] = [
     startYear: "2020",
     endYear: "2022",
     dates: "September 2020 – August 2022",
+    technologies: ["Vue.js", "Node.js"],
     highlights: [
       "Developed websites and mobile applications for major publishers including New Scientist, The Independent and Tortoise Media.",
       "Led much of the Vue.js rewrite of the New Scientist mobile application, which is still in use today and has achieved a consistent 4.7 App Store rating. Post relaunch, paid subscribers rose 10–15%, and 85% of subscribers surveyed said the app played a part in their renewal.",
@@ -98,6 +105,7 @@ export const roles: Role[] = [
     links: [
       {
         label: "Read the New Scientist case study",
+        subject: "New Scientist",
         href: "https://www.pugpig.com/case-study/new-scientist/",
       },
     ],
@@ -110,6 +118,7 @@ export const roles: Role[] = [
     startYear: "2017",
     endYear: "2020",
     dates: "November 2017 – September 2020",
+    technologies: ["React", "Express.js"],
     highlights: [
       "Architected and implemented the administration interface for a content management system using React, backed by an Express.js REST API.",
       "Worked directly with clients throughout the product lifecycle, from initial requirements and technical design through to deployment.",
@@ -123,6 +132,7 @@ export const roles: Role[] = [
     startYear: "2012",
     endYear: "2014",
     dates: "September 2012 – January 2014",
+    technologies: ["Django", "JavaScript", "CSS"],
     highlights: [
       "Developed features for PetsPyjamas, a high-traffic e-commerce platform.",
       "Built internal tools to automate operational workflows, including a scheduler for automated Twitter quizzes and surveys.",
@@ -153,6 +163,15 @@ export const roles: Role[] = [
       "Developed interactive digital advertising units from PSD designs, with a focus on cross-browser compatibility.",
     ],
   },
+];
+
+export const brandHighlights = [
+  "Travelex",
+  "New Scientist",
+  "Tortoise Media",
+  "The Independent",
+  "O2",
+  "Virgin Media",
 ];
 
 export const skills: SkillGroup[] = [

@@ -20,7 +20,7 @@ export function SiteNav() {
         {fullName}
       </Link>
       <nav aria-label="Main" className="-mr-2 flex gap-2 md:-mr-3 md:gap-1">
-        <NavLink to="/experience" isCurrent={currentRoute === '/experience'}>
+        <NavLink to="/experience/{-$view}" isCurrent={currentRoute === '/experience/{-$view}'}>
           Experience
         </NavLink>
         <NavLink to="/contact" isCurrent={currentRoute === '/contact'}>
@@ -36,7 +36,7 @@ function NavLink({
   isCurrent,
   children,
 }: {
-  to: '/experience' | '/contact'
+  to: '/experience/{-$view}' | '/contact'
   isCurrent: boolean
   children: string
 }) {

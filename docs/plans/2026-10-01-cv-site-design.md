@@ -53,6 +53,18 @@ All copy lives in `src/content/cv.ts` as typed data, taken from Fergus's CV plus
 - When adding a hostname, attach it and confirm it serves before redirecting anything to it.
 - `pnpm preview` serves the built output locally through Wrangler. `pnpm run deploy` builds and publishes (`pnpm deploy` without `run` is a different, built-in pnpm command).
 
+## Experience views and downloads
+
+- `/experience` is the full CV and `/experience/summary` is a one-page summary: brand highlights, then each role's dates and technologies. Both come from one route file, `src/routes/experience.{-$view}.tsx`, and both are prerendered, so each has its own address and hydrates cleanly.
+- The toggle is a link between the two addresses. It fades the content and skips the page transition.
+- "Download PDF" serves `public/Fergus-Ruston-CV.pdf` or `public/Fergus-Ruston-CV-Summary.pdf`, matching the view. `pnpm pdf` (`scripts/generate-pdfs.mjs`) prints them from the built pages with the print stylesheet, using the installed Google Chrome. `pnpm run deploy` regenerates them on every deploy.
+- The Contact page has a "Copy email" button beside the `mailto:` link.
+
+## Search and sharing
+
+- Each page sets a canonical link. The home page carries `Person` structured data built from `src/content/cv.ts`.
+- The build writes `sitemap.xml` for the four pages. The 404 page and the PDFs are excluded in `vite.config.ts`. `public/robots.txt` points at the sitemap.
+
 ## Known issue
 
 `404.html` is prerendered at `/404` but served at whatever unknown path was requested. The router resolves a different match on the client, so React logs a hydration error and re-renders the page. The page displays correctly.

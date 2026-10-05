@@ -1,9 +1,24 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
-import { careerStart, profile, siteUrl } from '#/content/cv'
+import { careerStart, contactLinks, fullName, profile, roles, siteUrl } from '#/content/cv'
+
+// Lets search engines show name, role and profiles as structured details
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: fullName,
+  jobTitle: profile.title,
+  url: siteUrl,
+  email: `mailto:${profile.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: profile.location },
+  worksFor: { '@type': 'Organization', name: roles[0].company },
+  sameAs: contactLinks.map((link) => link.href),
+}
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [{ property: 'og:url', content: siteUrl }],
+    links: [{ rel: 'canonical', href: siteUrl }],
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify(personSchema) }],
   }),
   component: Home,
 })
@@ -21,7 +36,7 @@ function Home() {
       </p>
 
       <nav aria-label="Sections" className="mt-12 md:mt-20">
-        <SectionLink to="/experience" label="Experience" detail={`${careerStart} to now`} />
+        <SectionLink to="/experience/{-$view}" label="Experience" detail={`${careerStart} to now`} />
         <SectionLink to="/contact" label="Contact" detail={profile.email} />
         <div className="rule" />
       </nav>
@@ -34,7 +49,7 @@ function SectionLink({
   label,
   detail,
 }: {
-  to: '/experience' | '/contact'
+  to: '/experience/{-$view}' | '/contact'
   label: string
   detail: string
 }) {

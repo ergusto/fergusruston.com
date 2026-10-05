@@ -1,18 +1,40 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import { contactLinks, fullName, profile, siteUrl } from '#/content/cv'
+
+const url = `${siteUrl}/contact`
+const copiedMessageMs = 2000
 
 export const Route = createFileRoute('/contact')({
   head: () => ({
     meta: [
       { title: `Contact | ${fullName}` },
       { name: 'description', content: `Email and links for ${fullName}.` },
-      { property: 'og:url', content: `${siteUrl}/contact` },
+      { property: 'og:url', content: url },
     ],
+    links: [{ rel: 'canonical', href: url }],
   }),
   component: Contact,
 })
 
 function Contact() {
+  const [isCopied, setIsCopied] = useState(false)
+
+  useEffect(() => {
+    if (!isCopied) return
+    const timer = setTimeout(() => setIsCopied(false), copiedMessageMs)
+    return () => clearTimeout(timer)
+  }, [isCopied])
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setIsCopied(true)
+    } catch {
+      // Clipboard access can be refused; the address is still on screen and the mailto link works
+    }
+  }
+
   return (
     <main className="px-(--gutter) pb-24">
       <h1 className="display pt-6 text-3xl md:pt-12 md:text-5xl">Contact</h1>
@@ -28,6 +50,22 @@ function Contact() {
           {profile.email}
         </a>
       </div>
+
+      <button
+        type="button"
+        onClick={copyEmail}
+        className="mt-5 cursor-pointer border-4 border-fg px-4 py-2 font-bold transition-colors hover:bg-fg hover:text-bg"
+      >
+        {/* Both labels share one grid cell so the button keeps the width of the longer one */}
+        <span className="grid" aria-live="polite">
+          <span className={`col-start-1 row-start-1 ${isCopied ? 'invisible' : ''}`}>
+            Copy email
+          </span>
+          <span className={`col-start-1 row-start-1 ${isCopied ? '' : 'invisible'}`}>
+            Copied
+          </span>
+        </span>
+      </button>
 
       <ul className="mt-16 md:mt-24">
         {contactLinks.map((link) => (
