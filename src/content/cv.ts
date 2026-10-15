@@ -41,7 +41,7 @@ export const profile = {
     "Software engineer. I build fast, accessible web products and delightful user experiences.",
   summary: [
     "Senior Software Engineer specialising in TypeScript and React. At Nearform, I work as an embedded engineer within client teams, contributing directly to their codebases, technical decisions and engineering practices. Most recently, I’ve worked on Virgin Media’s main web platform, built with Next.js and backed by Fastify APIs, serving millions of users each month. Earlier at Nearform, I worked on mobile applications for Travelex and O2 Priority.",
-    "With 17 years in software development, I’ve worked through significant shifts in the technology landscape and continue to adapt my approach as new tools and practices emerge. I integrate AI-assisted development throughout my workflow, favouring Claude Code. I use spec-driven development to define constraints and guide implementation, and AI agents to explore alternative solutions before committing to an approach. I also use methodologies such as BMAD to structure and guide development.",
+    "With 17 years in software development, I’ve worked through significant shifts in the technology landscape and continue to adapt my approach as new tools and practices emerge. I integrate AI-assisted development throughout my workflow. I use spec-driven development to define constraints and guide implementation, and AI agents to explore alternative solutions before committing to an approach. I also use methodologies such as BMAD to structure and guide development.",
   ],
 };
 
