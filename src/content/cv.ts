@@ -40,9 +40,8 @@ export const profile = {
   pitch:
     "Software engineer. I build fast, accessible web products and delightful user experiences.",
   summary: [
-    "Senior software engineer specialising in TypeScript, React and application development across web and mobile. I design and build applications across the full stack, from accessible, high-performance user interfaces through to backend services and APIs.",
-    "I work with cross-functional, client-facing teams to deliver high-quality digital products for large organisations and established publishers. I take ownership from technical design and implementation through to deployment and ongoing development.",
-    "I use AI-assisted development tools throughout the engineering workflow, from exploring solutions and writing code to testing, debugging and documentation. I work with tools including Claude Code and Codex, and approaches such as spec-driven development and BMAD to structure and guide AI-assisted development.",
+    "Senior Software Engineer specialising in TypeScript and React. At Nearform, I work as an embedded engineer within client teams, contributing directly to their codebases, technical decisions and engineering practices. Most recently, I’ve worked on Virgin Media’s main web platform, built with Next.js and backed by Fastify APIs, serving millions of users each month. Earlier at Nearform, I worked on mobile applications for Travelex and O2 Priority.",
+    "With 17 years in software development, I’ve worked through significant shifts in the technology landscape and continue to adapt my approach as new tools and practices emerge. I integrate AI-assisted development throughout my workflow, favouring Claude Code. I use spec-driven development to define constraints and guide implementation, and AI agents to explore alternative solutions before committing to an approach. I also use methodologies such as BMAD to structure and guide development.",
   ],
 };
 
@@ -58,7 +57,7 @@ export const roles: Role[] = [
     dates: "May 2023 – Present",
     technologies: ["Next.js", "React", "React Native", "TypeScript", "Node.js", "Fastify"],
     highlights: [
-      "Developed and shipped production features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
+      "Built features for Virgin Media’s primary web platform, working with Next.js, React and TypeScript.",
       "Built Travelex Money App, a greenfield React Native app, as part of the team that delivered it in under six months, leading to a double-digit increase in sales conversion and a 99.8% crash-free rate.",
       "Designed and delivered features for O2 Priority, a large-scale React Native application with 3.6 million active users.",
       "Worked across the full TypeScript stack, from React and React Native front ends through to Node.js/Fastify backend services.",
@@ -97,9 +96,9 @@ export const roles: Role[] = [
     dates: "September 2020 – August 2022",
     technologies: ["Vue.js", "Node.js"],
     highlights: [
-      "Developed websites and mobile applications for major publishers including New Scientist, The Independent and Tortoise Media.",
+      "Built websites and mobile applications for major publishers including New Scientist, The Independent and Tortoise Media.",
       "Led much of the Vue.js rewrite of the New Scientist mobile application, which is still in use today and has achieved a consistent 4.7 App Store rating. Post relaunch, paid subscribers rose 10–15%, and 85% of subscribers surveyed said the app played a part in their renewal.",
-      "Developed bespoke publisher experiences on top of Pugpig’s underlying publishing platforms, adapting shared technology to the requirements of individual products.",
+      "Built bespoke publisher experiences on top of Pugpig’s underlying publishing platforms, adapting shared technology to the requirements of individual products.",
       "Worked across web and mobile codebases within a product-focused engineering environment.",
     ],
     links: [
